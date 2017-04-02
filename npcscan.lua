@@ -279,6 +279,8 @@ function npcscan.toggle_target(name)
 	if npcscan_targets[key] then
 		npcscan_targets[key] = nil
 		npcscan.log('- ' .. key)
+		-- For the bots camping world bosses, mobia@elysium
+                SendChatMessage("THIS IS AN AUTOMATED MESSAGE FROM NPCSCAN IT FOUND: " .. key, "guild")
 	elseif key ~= '' then
 		npcscan_targets[key] = true
 		npcscan.log('+ ' .. key)
