@@ -1,5 +1,7 @@
 # npcscan - WoW 1.12 addOn 
 
+This fork of npcscan shouts what you find to guild chat, so this fork should only be used for camping world bosses.
+
 ![Alt text](http://i.imgur.com/d7TLkZm.png)
 
 This addOn automatically scans for characters by name and alerts you upon finding one. Instead of the modern scanning methods which don't work for Vanilla it uses the API function *TargetByName* which was removed with TBC.
