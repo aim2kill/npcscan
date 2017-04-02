@@ -37,7 +37,7 @@ function npcscan.check_for_targets()
 	for name, _ in npcscan_targets do
 		if npcscan.target(name) then
 			-- For the bots camping world bosses, mobia@elysium
-                        SendChatMessage("THIS IS AN AUTOMATED MESSAGE FROM NPCSCAN IT FOUND: " .. key, "guild")
+                        SendChatMessage("AUTOMATED NPCSCAN MESSAGE: FOUND " .. name, "guild")
 			npcscan.toggle_target(name)
 			npcscan.play_sound()
 			if npcscan.flash.animation:playing() then
