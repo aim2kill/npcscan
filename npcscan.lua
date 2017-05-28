@@ -312,6 +312,7 @@ function SlashCmdList.NPCSCAN(parameter)
 	local _, _, name = strfind(parameter, '^%s*(.-)%s*$')
 	
 	if name == '' then
+		npcscan.log("npcscan will report to " .. npcscan_chattype)
 		for _, key in ipairs(npcscan.sorted_targets()) do
 			npcscan.log(key)
 		end

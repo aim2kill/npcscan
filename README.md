@@ -1,6 +1,6 @@
 # npcscan fork
 
-This fork of npcscan reports what you find automatically to a channel.
+This fork of npcscan reports what you find automatically to a channel, the addon reports the name, level, if it is elite and if it is PC/NPC.
 By default it reports to guild channel.
 
 To change the default channel do any of the following
