@@ -2,5 +2,5 @@
 ## Author: shirsig
 ## Title: npcscan
 ## Notes: Unit scanner with flashy alert
-## SavedVariables: npcscan_targets
+## SavedVariables: npcscan_targets, npcscan_chattype
 npcscan.lua

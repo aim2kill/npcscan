@@ -1,6 +1,23 @@
-# npcscan - WoW 1.12 addOn 
+# npcscan fork
 
-This fork of npcscan shouts what you find to guild chat, so this fork should only be used for camping world bosses.
+This fork of npcscan reports what you find automatically to a channel.
+By default it reports to guild channel.
+
+To change the default channel do any of the following
+
+~~~
+/script npcscan_chattype = "guild"
+/script npcscan_chattype = "party"
+/script npcscan_chattype = "raid"
+/script npcscan_chattype = "emote"
+/script npcscan_chattype = "say"
+/script npcscan_chattype = "yell"
+/script npcscan_chattype = "officer"
+~~~
+
+If the variable is set to anything else it will not report any findings.
+
+# npcscan - WoW 1.12 addOn 
 
 ![Alt text](http://i.imgur.com/d7TLkZm.png)
 
@@ -12,3 +29,4 @@ There are two commands:<br/>
 **/npcscan** lists the active scan targets<br/>
 **/npcscan name** adds/removes **name** to/from the scan targets<br/>
 When a target is detected it is removed and has to be readded to continue scanning for it.
+local chattypes = {"SAY", "YELL", "EMOTE", "PARTY", "RAID", "GUILD", "OFFICER"}

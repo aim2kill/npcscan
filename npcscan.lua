@@ -7,6 +7,9 @@ local BROWN = {.7, .15, .05}
 local YELLOW = {1, 1, .15}
 local CHECK_INTERVAL = .1
 
+local chattypes = {"SAY", "YELL", "EMOTE", "PARTY", "RAID", "GUILD", "OFFICER"}
+npcscan_chattype = "GUILD"
+
 npcscan_targets = {}
 
 do 
@@ -37,7 +40,23 @@ function npcscan.check_for_targets()
 	for name, _ in npcscan_targets do
 		if npcscan.target(name) then
 			-- For the bots camping world bosses, mobia@elysium
-                        SendChatMessage("AUTOMATED NPCSCAN MESSAGE: FOUND " .. name, "guild")
+			local lvl = UnitLevel("target")
+			if lvl == -1 then
+				lvl = "??"
+			end
+			if UnitIsPlusMob("target") then
+				lvl = lvl .. "(ELITE)"
+			end
+			if UnitPlayerControlled("target") then
+				lvl = lvl .. "(player)"
+			else
+				lvl = lvl .. "(NPC)"
+			end
+			for tmp_type in chattypes do
+				if chattypes[tmp_type] == strupper(npcscan_chattype) then
+					SendChatMessage("NPCSCAN FOUND " .. name .. " LEVEL " .. lvl, npcscan_chattype)
+				end
+			end
 			npcscan.toggle_target(name)
 			npcscan.play_sound()
 			if npcscan.flash.animation:playing() then
