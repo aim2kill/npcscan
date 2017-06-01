@@ -59,8 +59,8 @@ function npcscan.check_for_targets()
 				end
 			end
 			local is_world_boss_name = false
-			for boss in worldbosses do
-				if boss == strupper(name) then
+			for boss_ind in worldbosses do
+				if worldbosses[boss_ind] == strupper(name) then
 					is_world_boss_name = true
 				end
 			end

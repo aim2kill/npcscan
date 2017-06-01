@@ -1,6 +1,6 @@
 ## Interface: 11200
-## Author: shirsig
+## Author: shirsig, Mobia
 ## Title: npcscan
-## Notes: Unit scanner with flashy alert
+## Notes: Fork of shirsig/npcscan with shouting an world boss extensions
 ## SavedVariables: npcscan_targets, npcscan_chattype
 npcscan.lua
