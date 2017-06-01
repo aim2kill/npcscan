@@ -40,32 +40,32 @@ end
 function npcscan.check_for_targets()
 	for name, _ in npcscan_targets do
 		if npcscan.target(name) then
-			-- For the bots camping world bosses, mobia@elysium
-			local lvl = UnitLevel("target")
-			if lvl == -1 then
-				lvl = "??"
-			end
-			if UnitIsPlusMob("target") then
-				lvl = lvl .. "(ELITE)"
-			end
-			if UnitPlayerControlled("target") then
-				lvl = lvl .. "(player)"
-			else
-				lvl = lvl .. "(NPC)"
-			end
-			for tmp_type in chattypes do
-				if chattypes[tmp_type] == strupper(npcscan_chattype) then
-					SendChatMessage("NPCSCAN FOUND " .. name .. " LEVEL " .. lvl, npcscan_chattype)
-				end
-			end
 			local is_world_boss_name = false
 			for boss_ind in worldbosses do
 				if worldbosses[boss_ind] == strupper(name) then
 					is_world_boss_name = true
 				end
 			end
-			local is_npc_unknownlevel_elite = not UnitPlayerControlled("target") and UnitLevel("target") == -1 and UnitIsPlusMob("target")
-			if not is_world_boss_name or (is_world_boss_name and is_npc_unknownlevel_elite) then
+			local is_worldboss = UnitClassification("target") == "worldboss"
+			if not is_world_boss_name or (is_world_boss_name and is_worldboss) then
+				-- For the bots camping world bosses, mobia@elysium
+				local lvl = UnitLevel("target")
+				if lvl == -1 then
+					lvl = "??"
+				end
+				if UnitIsPlusMob("target") then
+					lvl = lvl .. "(ELITE)"
+				end
+				if UnitPlayerControlled("target") then
+					lvl = lvl .. "(player)"
+				else
+					lvl = lvl .. "(NPC)"
+				end
+				for tmp_type in chattypes do
+					if chattypes[tmp_type] == strupper(npcscan_chattype) then
+						SendChatMessage("NPCSCAN FOUND " .. name .. " LEVEL " .. lvl, npcscan_chattype)
+					end
+				end
 				npcscan.toggle_target(name)
 				npcscan.play_sound()
 				if npcscan.flash.animation:playing() then
