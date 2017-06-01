@@ -8,6 +8,7 @@ local YELLOW = {1, 1, .15}
 local CHECK_INTERVAL = .1
 
 local chattypes = {"SAY", "YELL", "EMOTE", "PARTY", "RAID", "GUILD", "OFFICER"}
+local worldbosses = {"LORD KAZZAK", "AZUREGOS", "LETHON", "EMERISS", "YSONDRE", "TAERAR"}
 npcscan_chattype = "GUILD"
 
 npcscan_targets = {}
@@ -57,15 +58,24 @@ function npcscan.check_for_targets()
 					SendChatMessage("NPCSCAN FOUND " .. name .. " LEVEL " .. lvl, npcscan_chattype)
 				end
 			end
-			npcscan.toggle_target(name)
-			npcscan.play_sound()
-			if npcscan.flash.animation:playing() then
-				npcscan.flash.animation:stop_after(3)
-			else
-				npcscan.flash:reset()
-				npcscan.flash.animation:play()			
+			local is_world_boss_name = false
+			for boss in worldbosses do
+				if boss == strupper(name) then
+					is_world_boss_name = true
+				end
 			end
-			npcscan.button:set_target()
+			local is_npc_unknownlevel_elite = not UnitPlayerControlled("target") and UnitLevel("target") == -1 and UnitIsPlusMob("target")
+			if not is_world_boss_name or (is_world_boss_name and is_npc_unknownlevel_elite) then
+				npcscan.toggle_target(name)
+				npcscan.play_sound()
+				if npcscan.flash.animation:playing() then
+					npcscan.flash.animation:stop_after(3)
+				else
+					npcscan.flash:reset()
+					npcscan.flash.animation:play()			
+				end
+				npcscan.button:set_target()
+			end
 		end
 	end
 end
