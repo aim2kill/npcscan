@@ -9,7 +9,7 @@ local CHECK_INTERVAL = .1
 
 local chattypes = {"SAY", "YELL", "EMOTE", "PARTY", "RAID", "GUILD", "OFFICER"}
 local worldbosses = {"LORD KAZZAK", "AZUREGOS", "LETHON", "EMERISS", "YSONDRE", "TAERAR"}
-npcscan_chattype = "GUILD"
+npcscan_chattype = "nil"
 
 npcscan_targets = {}
 
