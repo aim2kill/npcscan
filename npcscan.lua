@@ -53,17 +53,20 @@ function npcscan.check_for_targets()
 				if lvl == -1 then
 					lvl = "??"
 				end
-				if UnitIsPlusMob("target") then
-					lvl = lvl .. "(ELITE)"
-				end
+				lvl = lvl .. UnitClassification("target")
 				if UnitPlayerControlled("target") then
 					lvl = lvl .. "(player)"
 				else
 					lvl = lvl .. "(NPC)"
 				end
-				for tmp_type in chattypes do
-					if chattypes[tmp_type] == strupper(npcscan_chattype) then
-						SendChatMessage("NPCSCAN FOUND " .. name .. " LEVEL " .. lvl, npcscan_chattype)
+				if UnitHealth("target") > 0 then
+					if is_worldboss then
+							SendChatMessage("NPCSCAN FOUND " .. name .. " LEVEL " .. lvl, "GUILD")
+					end
+					for tmp_type in chattypes do
+						if chattypes[tmp_type] == strupper(npcscan_chattype) then
+							SendChatMessage("NPCSCAN FOUND " .. name .. " LEVEL " .. lvl, npcscan_chattype)
+						end
 					end
 				end
 				npcscan.toggle_target(name)
@@ -322,7 +325,10 @@ function SlashCmdList.NPCSCAN(parameter)
 	local _, _, name = strfind(parameter, '^%s*(.-)%s*$')
 	
 	if name == '' then
-		npcscan.log("npcscan will report to " .. npcscan_chattype)
+		npcscan.log("npcscan will report worldbosses to GUILD")
+		npcscan.log("and other scans to " .. npcscan_chattype)
+		npcscan.log("to change reporting channel do /script npcscan_chattype = \"type\"")
+		npcscan.log("where type is one of: SAY, YELL, EMOTE, PARTY, RAID, GUILD, OFFICER, nil")
 		for _, key in ipairs(npcscan.sorted_targets()) do
 			npcscan.log(key)
 		end
